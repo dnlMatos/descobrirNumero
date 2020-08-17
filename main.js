@@ -1,33 +1,44 @@
-var numRandom = Math.random * 100 + 1;
-var palpiteUsuario = document.querySelector(".campoPalpite");
-const btnEnviar = document.querySelector('.envioPalpite');
-var baixoOuAlto = document.querySelector('.baixoOuAlto')
-var numeroDePalpites = 0;
-var palpites = [];
+var numeroAleatorio = Math.floor(Math.random() * 100) + 1;
+
+var palpites = document.querySelector('.palpites');
+var ultimoResultado = document.querySelector('.ultimoResultado');
+var baixoOuAlto = document.querySelector('.baixoOuAlto');
+
+var envioPalpite = document.querySelector('.envioPalpite');
+var campoPalpite = document.querySelector('.campoPalpite');
+
+var contagemPalpites = 1;
+var botaoReinicio;
 
 function conferirPalpite() {
     var palpiteUsuario = Number(campoPalpite.value);
-    for (let i = 1; numeroDePalpites <= 10; i++) {
-        if (numeroDePalpites <= 10) {
-            if (palpiteUsuario > numRandom) {
-                baixoOuAlto.textContent = 'Valor acima do escolhido';
-                ultimoResultado.classList.add('.errou')
-            } else if (palpiteUsuario < numRandom) {
-                baixoOuAlto.textContent = 'Valor abaixo do escolhido';
-                ultimoResultado.classList.add('.errou')
-            } else {
-                ultimoResultado.textContent = 'Parabéns! Você acertou!';
-                ultimoResultado.classList.add('.acertou')
-                fimDeJogo();
-            }
-        }
-        palpiteUsuario.value = '';
-        palpiteUsuario.focus();
-        palpites[i] += palpites + ' ';
-        numeroDePalpites += 1;
+    if (contagemPalpites === 1) {
+        palpites.textContent = 'Palpites anteriores: ';
     }
-    ultimoResultado.textContent = 'FIM DE JOGO';
-    fimDeJogo();
+    palpites.textContent += palpiteUsuario + ' ';
+
+    if (palpiteUsuario === numeroAleatorio) {
+        ultimoResultado.textContent = 'Parabéns! Você acertou!';
+        ultimoResultado.style.backgroundColor = 'green';
+        baixoOuAlto.textContent = '';
+        configFimDeJogo();
+    } else if (contagemPalpites === 10) {
+        ultimoResultado.textContent = '!!!FIM DE JOGO!!!';
+        baixoOuAlto.textContent = '';
+        configFimDeJogo();
+    } else {
+        ultimoResultado.textContent = 'Errado!';
+        ultimoResultado.style.backgroundColor = 'red';
+        if (palpiteUsuario < numeroAleatorio) {
+            baixoOuAlto.textContent = 'Seu palpite está muito baixo!';
+        } else if (palpiteUsuario > numeroAleatorio) {
+            baixoOuAlto.textContent = 'Seu palpite está muito alto!';
+        }
+    }
+
+    contagemPalpites++;
+    campoPalpite.value = '';
+    campoPalpite.focus();
 }
 
 function fimDeJogo() {
