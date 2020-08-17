@@ -13,3 +13,13 @@ body {
     color: white;
     padding: 3px;
 }
+
+.acertou {
+    background-color: green;
+    font-size: 16px;
+}
+
+.errou {
+    background-color: rosybrown;
+    font-size: 12px;
+}
