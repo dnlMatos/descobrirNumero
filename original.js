@@ -8,7 +8,6 @@ var contagemPalpites = 1;
 var botaoReinicio;
 campoPalpite.focus();
 
-function conferirPalpite() {
     var palpiteUsuario = Number(campoPalpite.value);
     if (contagemPalpites === 1) {
         palpites.textContent = 'Palpites anteriores: ';
@@ -35,7 +34,7 @@ function conferirPalpite() {
     contagemPalpites++;
     campoPalpite.value = '';
     campoPalpite.focus();
-}
+
 botaoEnviar.addEventListener('click', conferirPalpite);
 
 function configFimDeJogo() {

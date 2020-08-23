@@ -25,3 +25,14 @@ body {
     padding: 3px;
     background-color: lightcoral;
 }
+
+.palpites{
+    background-color: rgb(149, 218, 218);
+}
+
+.fimJogo{
+    background-color: black;
+    color: aliceblue;
+    font-weight: bold;
+    text-align: center;
+}
